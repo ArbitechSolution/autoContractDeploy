@@ -1,0 +1,35 @@
+.bg-cover{
+    background-image: url("https://drawever.b-cdn.net/articles/7-2022/1658314364682.jpeg?width=600");
+    background-size: cover;
+    height: 200px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+
+}
+.fornBtn{
+display: flex;
+justify-content: center;
+margin-top: 5px;
+padding: 20px;
+border: 5px saddlebrown solid;
+}
+.deployedSection{
+ 
+border: 5px saddlebrown solid;
+margin-top: 5px;
+}
+.deploy{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+.file_download{
+    /* position: relative; */
+    color: #fff;
+}
+.file_icon{
+    
+    font-size: 108px;
+    /* border:#fff 2px solid; */
+}
