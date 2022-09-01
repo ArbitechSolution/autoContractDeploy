@@ -22,9 +22,10 @@ function DeployForm() {
       console.log("Not Connected");
     } else {
       console.log(data);
-      let { collectionName, collectionSymbol, maxSupply, mintAmount, whiteList, preSalePrice, publicSalePrice } = data;
-      console.log("json", JSON.parse(whiteList));
       const web3 = window.web3;
+      let { collectionName, collectionSymbol, maxSupply, mintAmount, whiteList, preSalePrice, publicSalePrice, PreSaleLimit, publicSaleLimit } = data;
+      let ethPreSalePrice = web3.utils.toWei(preSalePrice);
+      let ethPublicSalePrice = web3.utils.toWei(publicSalePrice);
       const contract = new web3.eth.Contract(abi);
    
       let res = await contract.deploy({
@@ -37,8 +38,10 @@ function DeployForm() {
             mintAmount,
             JSON.parse(whiteList),
           "https://gateway.pinata.cloud/ipfs/QmerrQyPBz7rZw1wLrLMBDaV8s6bTS57LoRSqHJQEHy4T6/",
-            preSalePrice,
-            publicSalePrice
+          PreSaleLimit,
+          publicSaleLimit,
+          ethPreSalePrice,
+          ethPublicSalePrice
           ]
       }).send({
         from: acc
@@ -130,7 +133,7 @@ function DeployForm() {
             </Form.Group>
             <Form.Group className="mb-1" controlId="formBasicEmail">
               <Form.Label>Presale price</Form.Label>
-              <Form.Control type="number"  placeholder="Enter Presale price"
+              <Form.Control type="text"  placeholder="Enter Presale price"
                 {...register("preSalePrice", { required: true })}
               />
               {/* <Form.Text className="text-muted">
@@ -139,8 +142,20 @@ function DeployForm() {
             </Form.Group>
             <Form.Group className="mb-1" controlId="formBasicEmail">
               <Form.Label>Public sale price</Form.Label>
-              <Form.Control type="number"  placeholder="Enter Public sale price"
+              <Form.Control type="text"  placeholder="Enter Public sale price"
                 {...register("publicSalePrice", { required: true })}
+              />
+              </Form.Group>
+            <Form.Group className="mb-1" controlId="formBasicEmail">
+              <Form.Label>Presale limit</Form.Label>
+              <Form.Control type="number"  placeholder="Enter Presale limit"
+                {...register("PreSaleLimit", { required: true })}
+              />
+              </Form.Group>
+            <Form.Group className="mb-1" controlId="formBasicEmail">
+              <Form.Label>Public sale limit</Form.Label>
+              <Form.Control type="number"  placeholder="Enter Public sale limit"
+                {...register("publicSaleLimit", { required: true })}
               />
               {/* <Form.Text className="text-muted">
           We'll never share your email with anyone else.
